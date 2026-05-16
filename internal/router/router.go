@@ -2,6 +2,7 @@ package router
 
 import (
 	"log/slog"
+	"weather-api/internal/config"
 	"weather-api/internal/handler"
 	"weather-api/internal/middleware"
 
@@ -12,6 +13,7 @@ import (
 type Dependencies struct {
 	WeatherHandler *handler.WeatherHandler
 	Logger         *slog.Logger
+	Config         *config.Config
 }
 
 func New(deps Dependencies) *chi.Mux {
@@ -21,6 +23,7 @@ func New(deps Dependencies) *chi.Mux {
 	r.Use(chimiddleware.RequestID)
 	r.Use(chimiddleware.Recoverer)
 	r.Use(middleware.Logger(deps.Logger))
+	r.Use(middleware.RateLimit(deps.Config.RateLimitRequests, deps.Config.RateLimitWindow))
 
 	r.Route("/api/v1", func(r chi.Router) {
 		mountWeather(r, deps.WeatherHandler)

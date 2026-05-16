@@ -39,6 +39,7 @@ func New(cfg *config.Config, logger *slog.Logger) (*Container, error) {
 	deps := router.Dependencies{
 		WeatherHandler: handler.NewWeatherHandler(weatherSvc),
 		Logger:         logger,
+		Config:         cfg,
 	}
 
 	return &Container{
