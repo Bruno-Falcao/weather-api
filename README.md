@@ -1,4 +1,4 @@
-# Weather api from [ROADMAP.SH](https://roadmap.sh/projects/expense-tracker)
+# Weather api from [ROADMAP.SH](https://roadmap.sh/projects/weather-api-wrapper-service)
 
 This APIs consume an third party weather api, it's simples but very open to make something more complex.
 
